@@ -1,3 +1,4 @@
+# Laravel Defaults
 /node_modules
 /public/hot
 /public/storage
@@ -10,3 +11,14 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
+
+# Editor settings
+.vscode
+
+# Generated Assets
+public/js
+public/css
+public/mix-manifest.json
+
+# Hot ignores - Append this flag to the end of a filename (filename--gitignore.php) to ignore it.
+*--gitignore.*
