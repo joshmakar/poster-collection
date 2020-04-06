@@ -13,6 +13,7 @@ class Poster extends Model
      */
     protected $fillable = [
         'name',
+        'description',
         'width',
         'height',
         'orientation',
