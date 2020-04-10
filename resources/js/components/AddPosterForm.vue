@@ -12,15 +12,15 @@
       </div>
       <div class="form-group">
         <label for="poster_width">Width (in.)</label>
-        <input v-model="newPoster.width" type="number" min="0" max="999.999" step="0.001" class="form-control" id="poster_width">
+        <input v-model="newPoster.width" type="number" min="0" max="999.999" step="0.001" class="form-control" id="poster_width" required>
       </div>
       <div class="form-group">
         <label for="poster_height">Height (in.)</label>
-        <input v-model="newPoster.height" type="number" min="0" max="999.999" step="0.001" class="form-control" id="poster_height">
+        <input v-model="newPoster.height" type="number" min="0" max="999.999" step="0.001" class="form-control" id="poster_height" required>
       </div>
       <div class="form-group">
         <label for="poster_orientation">Orientation</label>
-        <select v-model="newPoster.orientation" class="form-control" id="poster_orientation">
+        <select v-model="newPoster.orientation" class="form-control" id="poster_orientation" required>
           <option value="landscape">Landscape</option>
           <option value="portrait">Portrait</option>
         </select>
@@ -68,10 +68,11 @@
        */
       submitNewPoster() {
         this.errors = {};
-        let formData = new FormData();
+        const formData = new FormData();
 
         Object.keys(this.newPoster).forEach(key => {
-          formData.append(key, this.newPoster.key);
+          console.log(key, this.newPoster[key])
+          formData.append(key, this.newPoster[key]);
         });
 
         formData.append('posterImage', this.posterImage);
