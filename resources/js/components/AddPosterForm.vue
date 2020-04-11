@@ -34,6 +34,7 @@
           accept="image/png, image/jpeg"
           ref="posterImage"
           v-on:change="handleFileUpload()"
+          required
         >
       </div>
       <button type="submit" class="btn btn-primary">Submit</button>
