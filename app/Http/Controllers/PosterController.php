@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Poster;
 use Illuminate\Http\Request;
+use Auth;
 
 class PosterController extends Controller
 {
@@ -50,8 +51,32 @@ class PosterController extends Controller
             'width' => 'required',
             'height' => 'required',
             'orientation' => 'required',
-            'posterImage' => 'mimes:jpeg,jpg,png|required|max:100000'
+            'posterImage' => 'mimes:jpeg,jpg,png|required|max:10000'
         ]);
+
+        if ($request->hasFile('posterImage')) {
+            $filenameWithExt = $request->file('posterImage')->getClientOriginalName();
+            // Get just filename
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+           // Get just ext
+            $extension = $request->file('posterImage')->getClientOriginalExtension();
+            //Filename to store
+            $fileNameToStore = $filename.'_'.time().'.'.$extension;
+          // Upload Image
+            $path = $request->file('posterImage')-> storeAs('public/poster_images', $fileNameToStore);
+        } else {
+            $fileNameToStore = 'noimage.jpg';
+        }
+
+        $posterDetails = $request->all();
+
+        $posterDetails['user_id'] = Auth::id();
+
+        $posterDetails['image_url'] = $fileNameToStore;
+
+        $poster = Poster::create($posterDetails);
+
+        return $poster;
     }
 
     /**
