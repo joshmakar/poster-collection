@@ -25,7 +25,9 @@ class PosterController extends Controller
      */
     public function index()
     {
-        //
+        $posters = Poster::all();
+
+        return view('posters.index')->with(['posters' => $posters]);
     }
 
     /**
@@ -76,7 +78,7 @@ class PosterController extends Controller
 
         $poster = Poster::create($posterDetails);
 
-        return $poster;
+        return ['redirect' => route('posters.index')];
     }
 
     /**
@@ -87,7 +89,7 @@ class PosterController extends Controller
      */
     public function show(Poster $poster)
     {
-        //
+        return view('posters.show')->with(['poster' => $poster]);
     }
 
     /**

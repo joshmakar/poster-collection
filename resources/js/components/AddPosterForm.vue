@@ -86,7 +86,7 @@
               }
             }
           ).then(response => {
-            alert('Message sent!');
+            window.location = response.data.redirect;
           }).catch(error => {
             if (error.response.status === 422) {
               this.errors = error.response.data.errors || {};
